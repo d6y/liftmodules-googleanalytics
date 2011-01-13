@@ -6,11 +6,11 @@ Inserts the [Google Analytics async tracking code](http://code.google.com/apis/a
 
 There is currently no public repository containing this module, so for now you'll need to compile it yourself :-(
 
-$ git clone git://github.com/d6y/liftmodules-googleanalytics.git
-$ cd liftmodules-googleanalytics
-$ sbt
-> update
-> publish-local
+    $ git clone git://github.com/d6y/liftmodules-googleanalytics.git
+    $ cd liftmodules-googleanalytics
+    $ sbt
+    > update
+    > publish-local
 
 Once published, add the following dependency to your SBT project file:
 
