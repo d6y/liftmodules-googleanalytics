@@ -6,11 +6,11 @@ Inserts the [Google Analytics async tracking code](http://code.google.com/apis/a
 
 There is currently no public repository containing this module, so for now you'll need to compile it yourself :-(
 
-$ git clone
-$ cd
+$ git clone git://github.com/d6y/liftmodules-googleanalytics.git
+$ cd liftmodules-googleanalytics
 $ sbt
-update
-publish-local
+> update
+> publish-local
 
 Once published, add the following dependency to your SBT project file:
 
@@ -20,7 +20,7 @@ In your application's Boot.boot code:
 
 	bootstrap.liftmodules.GoogleAnalytics.init
 
-Set your tracking code as the google.analytics.id in your Props file.  For example, add the following to src/main/resources/production.default.props
+Finally, set your tracking code as the google.analytics.id in your Props file.  For example, add the following to src/main/resources/production.default.props
 
 	google.analytics.id=UA-XXXXXXXX-X
 
