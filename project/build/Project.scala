@@ -3,11 +3,7 @@ import de.element34.sbteclipsify._
 
 class HelloWorldProject(info: ProjectInfo) extends DefaultProject(info) with Eclipsify {
   
-  lazy val liftVersion = "2.3"
-
-  // E.g., google-analytics_2.8.1-2.3-1.0.jar
-  //       project name _ Scala verison - Lift version - module version
-  override def artifactBaseName = artifactID + "-" + liftVersion + "-" +  version.toString
+  val liftVersion = "2.3"
 
   override def libraryDependencies = Set(
     "net.liftweb" %% "lift-webkit" % liftVersion % "compile" withSources(),
@@ -18,4 +14,18 @@ class HelloWorldProject(info: ProjectInfo) extends DefaultProject(info) with Ecl
     "net.liftweb" %% "lift-util" % liftVersion % "compile" withSources()
     
   ) ++ super.libraryDependencies
+
+  // To publish to the cloudbees repos:
+  override def managedStyle = ManagedStyle.Maven
+  val publishTo = "liftmodules repository" at "https://repository-liftmodules.forge.cloudbees.com/release/"
+
+  lazy val repo_user = system[String]("repo.user")
+  lazy val repo_password = system[String]("repo.password")
+
+  // The name and domain format here are not arbitrary:
+  Credentials.add("liftmodules repository", "repository-liftmodules.forge.cloudbees.com", repo_user.value, repo_password.value)
+ 
+  // Had to manually create directory structure using webdav :-(
+  // otherwise I received a Forbidden response from the repository
+
 }
