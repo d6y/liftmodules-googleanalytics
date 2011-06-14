@@ -5,11 +5,11 @@ Inserts the [Google Analytics async tracking code](http://code.google.com/apis/a
 
 ## Using this module
 
-Add the following repository to SBT project file:
+Add the following repository to your SBT project file:
 
 	lazy val liftModulesRelease = "liftmodules repository" at "http://repository-liftmodules.forge.cloudbees.com/release/"
 
-And then this dependency:
+And then include this dependency:
 
 	"net.liftmodules" %% "google-analytics" % (liftVersion+"-0.9")
 
@@ -21,7 +21,7 @@ Finally, set your tracking code as the google.analytics.id in your Props file.  
 
 	google.analytics.id=UA-XXXXXXXX-X
 
-...obviously replacing XXXXXXX-X with the code Google issued you with.  Be sure to start your Lift app with -Drun.mode=production flag (or set the value in your dev props file).
+...obviously replacing XXXXXXX-X with the code Google issued you with.  Be sure to start your Lift app with -Drun.mode=production flag (or set the value of google.analytics.id in your dev props file).  
 
 ## Supported Scala and Lift versions
 
