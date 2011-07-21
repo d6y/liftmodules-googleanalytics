@@ -25,6 +25,7 @@ Finally, set your tracking code as the google.analytics.id in your Props file.  
 
 ## Supported Scala and Lift versions
 
-Scala 2.8.1 and 2.9.0-1: Lift 2.4-M1 2.4-M2
+Scala 2.8.1 and 2.9.0-1: from Lift 2.4-M1 and onwards
 
-Scala 2.8.1 only: Lift 2.3
+Scala 2.8.1 only: Lift 2.3 final release only.
+
