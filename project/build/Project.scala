@@ -3,7 +3,9 @@ import de.element34.sbteclipsify._
 
 class HelloWorldProject(info: ProjectInfo) extends DefaultProject(info) with Eclipsify {
   
-  val liftVersion = "2.4-M2"
+  val liftVersion = "2.4-M3"
+
+  lazy val JavaNet = "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
   override def libraryDependencies = Set(
     "net.liftweb" %% "lift-webkit" % liftVersion % "compile" withSources(),
