@@ -1,0 +1,1 @@
+The [Google Analytics external Lift Module](https://github.com/d6y/liftmodules-googleanalytics) inserts [Google Analytics async tracking code](http://code.google.com/apis/analytics/docs/tracking/asyncTracking.html) into a [Lift](http://www.liftweb.net) application.
