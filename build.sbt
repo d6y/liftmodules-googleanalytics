@@ -1,6 +1,6 @@
 name := "google-analytics"
 
-version := "2.4-M4-0.9"
+version := "2.4-M5-0.9"
 
 organization := "net.liftmodules"
  
@@ -16,7 +16,7 @@ jettyScanDirs := Nil
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
 libraryDependencies ++= {
-  val liftVersion = "2.4-M4" 
+  val liftVersion = "2.4-M5" 
   Seq(
     "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default",
     "net.liftweb" %% "lift-mapper" % liftVersion % "compile->default",
