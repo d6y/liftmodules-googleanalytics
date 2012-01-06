@@ -9,7 +9,7 @@ That is, if you supply a Google Analytics tracking ID, the head of all pages wil
 
 1. Add the following repository to your SBT project file:
 
-    For SBT 0.10:
+    For SBT 0.11:
 
         resolvers += "liftmodules repository" at "http://repository-liftmodules.forge.cloudbees.com/release/"
 

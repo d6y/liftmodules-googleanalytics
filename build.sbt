@@ -1,6 +1,6 @@
 name := "google-analytics"
 
-version := "2.4-M5-0.9"
+version := "2.4-RC1-0.9"
 
 organization := "net.liftmodules"
  
@@ -10,13 +10,10 @@ crossScalaVersions := Seq("2.8.1", "2.9.0-1", "2.9.1")
 
 seq(com.github.siasia.WebPlugin.webSettings :_*)
 
-// If using JRebel
-jettyScanDirs := Nil
-
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
 libraryDependencies ++= {
-  val liftVersion = "2.4-M5" 
+  val liftVersion = "2.4-RC1" 
   Seq(
     "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default",
     "net.liftweb" %% "lift-mapper" % liftVersion % "compile->default",
@@ -26,7 +23,7 @@ libraryDependencies ++= {
 // Customize any further dependencies as desired
 libraryDependencies ++= Seq(
   //"org.eclipse.jetty" % "jetty-webapp" % "7.3.0.v20110203" % "jetty", // For Jetty 7
-  "org.mortbay.jetty" % "jetty" % "6.1.22" % "jetty,test", // For Jetty 6, add scope test to make jetty avl. for tests
+  "org.mortbay.jetty" % "jetty" % "6.1.22" % "container,test", // For Jetty 6, add scope test to make jetty avl. for tests
   "org.scala-tools.testing" % "specs_2.9.0" % "1.6.8" % "test", // For specs.org tests
   "junit" % "junit" % "4.8" % "test->default", // For JUnit 4 testing
   "javax.servlet" % "servlet-api" % "2.5" % "provided->default",
