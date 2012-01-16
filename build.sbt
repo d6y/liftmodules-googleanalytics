@@ -10,8 +10,6 @@ crossScalaVersions := Seq("2.8.1", "2.9.0-1", "2.9.1")
 
 seq(com.github.siasia.WebPlugin.webSettings :_*)
 
-seq(posterousSettings :_*) 
-
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
 libraryDependencies ++= {
