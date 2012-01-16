@@ -1,0 +1,2 @@
+* Built for Lift 2.4 and Scala 2.8.1 to 2.9.1.
+
