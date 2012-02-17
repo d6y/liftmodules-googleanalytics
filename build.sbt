@@ -1,6 +1,8 @@
 name := "google-analytics"
 
-version := "2.4-0.9"
+liftVersion <<= liftVersion ?? "2.4"
+
+version <<= liftVersion apply { _ + "-0.9" }
 
 organization := "net.liftmodules"
  
@@ -10,13 +12,14 @@ crossScalaVersions := Seq("2.8.1", "2.9.0-1", "2.9.1")
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
-libraryDependencies ++= {
-  val liftVersion = "2.4" 
-  Seq(
-    "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default",
-    "net.liftweb" %% "lift-mapper" % liftVersion % "compile->default",
-    "net.liftweb" %% "lift-wizard" % liftVersion % "compile->default" )
-}
+
+libraryDependencies <++= liftVersion { v =>
+  "net.liftweb" %% "lift-webkit" % v % "compile->default" ::
+  "net.liftweb" %% "lift-mapper" % v % "compile->default" ::
+  "net.liftweb" %% "lift-wizard" % v % "compile->default" ::
+  Nil
+}    
+
 
 // Customize any further dependencies as desired
 libraryDependencies ++= Seq(
