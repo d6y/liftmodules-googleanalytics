@@ -2,7 +2,7 @@ name := "google-analytics"
 
 liftVersion <<= liftVersion ?? "2.4"
 
-version <<= liftVersion apply { _ + "-0.9" }
+version <<= liftVersion apply { _ + "-1.0-SNAPSHOT" }
 
 organization := "net.liftmodules"
  
@@ -12,16 +12,12 @@ crossScalaVersions := Seq("2.8.1", "2.9.0-1", "2.9.1")
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
-
 libraryDependencies <++= liftVersion { v =>
   "net.liftweb" %% "lift-webkit" % v % "compile->default" ::
   "net.liftweb" %% "lift-mapper" % v % "compile->default" ::
-  "net.liftweb" %% "lift-wizard" % v % "compile->default" ::
   Nil
 }    
 
-
-// Customize any further dependencies as desired
 libraryDependencies ++= Seq(
   "org.scala-tools.testing" % "specs_2.9.0" % "1.6.8" % "test", // For specs.org tests
   "junit" % "junit" % "4.8" % "test->default", // For JUnit 4 testing
@@ -30,9 +26,44 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "0.9.26" % "compile->default" // Logging
 )
 
- // To publish to the Cloudbees repos:
 
-publishTo := Some("liftmodules repository" at "https://repository-liftmodules.forge.cloudbees.com/release/")
- 
-credentials += Credentials( file("/private/liftmodules/cloudbees.credentials") )
+publishTo <<= version { _.endsWith("SNAPSHOT") match {
+ 	case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
+ 	case false => Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
+  }
+ } 
 
+credentials += Credentials( file("sonatype.credentials") )
+
+publishMavenStyle := true
+
+publishArtifact in Test := false
+
+pomIncludeRepository := { _ => false }
+
+pomExtra := (
+	<url></url>
+	<licenses>
+		<license>
+	      <name>Apache 2.0 License</name>
+	      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+	      <distribution>repo</distribution>
+	    </license>
+	 </licenses>
+	 <scm>
+	    <url>git@github.com:d6y/liftmodules-googleanalytics.git</url>
+	    <connection>scm:git:git@github.com:d6y/liftmodules-googleanalytics.git</connection>
+	 </scm>
+	 <developers>
+	    <developer>
+	      <id>d6y</id>
+	      <name>Richard Dallaway</name>
+	      <url>http://richard.dallaway.com</url>
+	 	</developer>
+	 </developers> 
+ )
+  
+
+// Thank you: 
+// https://github.com/sbt/sbt.github.com/blob/gen-master/src/jekyll/using_sonatype.md
+// https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide

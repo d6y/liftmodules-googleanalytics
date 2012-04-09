@@ -11,15 +11,15 @@ That is, if you supply a Google Analytics tracking ID, the head of all pages wil
 
     For SBT 0.11:
 
-        resolvers += "liftmodules repository" at "http://repository-liftmodules.forge.cloudbees.com/release/"
+        resolvers += "Sonatype" at "https://oss.sonatype.org/content/repositories/public/"
 
     For SBT 0.7:
 
-        lazy val liftModulesRelease = "liftmodules repository" at "http://repository-liftmodules.forge.cloudbees.com/release/"
+        lazy val liftModulesRelease =  "Sonatype" at "https://oss.sonatype.org/content/repositories/public/"
 
 2. Include this dependency:
 
-         "net.liftmodules" %% "google-analytics" % (liftVersion+"-0.9")
+         "net.liftmodules" %% "google-analytics" % (liftVersion+"-1.0")
 
 3. In your application's Boot.boot code:
 
