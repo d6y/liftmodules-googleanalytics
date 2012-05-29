@@ -1,16 +1,20 @@
 name := "google-analytics"
 
-liftVersion <<= liftVersion ?? "2.4"
+liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
 
 version <<= liftVersion apply { _ + "-1.0-SNAPSHOT" }
 
 organization := "net.liftmodules"
  
-scalaVersion := "2.9.1"
+scalaVersion := "2.9.2"
  
-crossScalaVersions := Seq("2.8.1", "2.9.0-1", "2.9.1")
+ 
+crossScalaVersions := Seq("2.8.1", "2.9.0-1", "2.9.1", "2.9.2")
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
+
+resolvers += ScalaToolsSnapshots
+
 
 libraryDependencies <++= liftVersion { v =>
   "net.liftweb" %% "lift-webkit" % v % "compile->default" ::
