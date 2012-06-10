@@ -1,0 +1,5 @@
+* Added support for compliance with EU cookie laws.
+* Repository moved to Sonatype.
+* Built for Lift 2.5-SNAPSHOT.
+
+

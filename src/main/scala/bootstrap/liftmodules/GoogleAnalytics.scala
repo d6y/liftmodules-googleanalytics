@@ -1,5 +1,5 @@
 /*
-	Copyright 2011 Spiral Arm Ltd
+	Copyright 2011-2012 Spiral Arm Ltd
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,16 +15,41 @@
 */
 package bootstrap.liftmodules
 
-import net.liftweb.util.Props
 import net.liftweb.http._
+import net.liftweb.util.Props
+import net.liftweb.http.js.JsCmd
+import net.liftweb.http.js.JsCmds._
+import net.liftweb.common.Loggable
 
 import net.liftmodules.googleanalytics.Async
 
-object GoogleAnalytics {
-	
-	def init : Unit = Props.get("google.analytics.id") map Async.headJs foreach { js =>
-		def addTracking(s: LiftSession, r: Req) : Unit = S.putInHead(js)
-		LiftSession.onBeginServicing = addTracking _ :: LiftSession.onBeginServicing
-	}
-	
+object GoogleAnalytics extends Loggable {
+
+  def init: Unit = init( ()⇒true )
+  
+  def init(includeTest: () ⇒ Boolean): Unit = Props.get("google.analytics.id") map Async.headJs foreach { js =>
+    def addTracking(s: LiftSession, r: Req) : Unit =  if (includeTest()) S.putInHead(js)
+    LiftSession.onBeginServicing = addTracking _ :: LiftSession.onBeginServicing
+  }
+
+  // noticeJs is by-name to allow you to side-effect (eg., set cookies)
+  def alertUser(cond: () ⇒ Boolean)(noticeJs: ⇒ JsCmd): Unit = {
+
+    def addNotice(s: LiftSession, r: Req) : Unit =  try { 
+        if (cond()) S.appendJs(noticeJs)
+      } catch {
+        case e => logger.error("Unhandled exception from alertUser", e)
+    }
+
+    LiftSession.onBeginServicing = addNotice _ :: LiftSession.onBeginServicing
+  }
+  
+  object dsl {
+    object only {
+      def when(f: => Boolean) = f _
+    }
+  }
+
+
 }
+
