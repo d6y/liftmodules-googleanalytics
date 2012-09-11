@@ -7,14 +7,14 @@ version <<= liftVersion apply { _ + "-1.0-SNAPSHOT" }
 organization := "net.liftmodules"
  
 scalaVersion := "2.9.2"
- 
- 
+
 crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1")
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
-resolvers += ScalaToolsSnapshots
+resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
+resolvers += "Sonatype OSS Release" at "http://oss.sonatype.org/content/repositories/releases"
 
 libraryDependencies <++= liftVersion { v =>
   "net.liftweb" %% "lift-webkit" % v % "compile->default" ::
