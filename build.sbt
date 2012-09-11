@@ -9,7 +9,7 @@ organization := "net.liftmodules"
 scalaVersion := "2.9.2"
  
  
-crossScalaVersions := Seq("2.8.1", "2.9.0-1", "2.9.1", "2.9.2")
+crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1")
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
@@ -49,7 +49,7 @@ publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
 
 pomExtra := (
-	<url></url>
+	<url>https://github.com:d6y/liftmodules-googleanalytics</url>
 	<licenses>
 		<license>
 	      <name>Apache 2.0 License</name>
