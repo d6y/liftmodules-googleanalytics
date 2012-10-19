@@ -1,8 +1,8 @@
 name := "google-analytics"
 
-liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
+liftVersion <<= liftVersion ?? "2.5-M2"
 
-version <<= liftVersion apply { _ + "-1.0-SNAPSHOT" }
+version <<= liftVersion apply { _ + "-1.0" }
 
 organization := "net.liftmodules"
  
