@@ -5,22 +5,22 @@ liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
 version <<= liftVersion apply { _ + "-1.0-SNAPSHOT" }
 
 organization := "net.liftmodules"
- 
+
 scalaVersion := "2.9.2"
 
-crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1")
+crossScalaVersions := Seq("2.10.0", 2.9.2", "2.9.1-1", "2.9.1")
+
+scalacOptions ++= Seq("-unchecked", "-deprecation")
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
-resolvers += "Sonatype OSS Release" at "http://oss.sonatype.org/content/repositories/releases"
-
 libraryDependencies <++= liftVersion { v =>
   "net.liftweb" %% "lift-webkit" % v % "compile->default" ::
   "net.liftweb" %% "lift-mapper" % v % "compile->default" ::
   Nil
-}    
+}
 
 libraryDependencies ++= Seq(
   "org.scala-tools.testing" % "specs_2.9.0" % "1.6.8" % "test", // For specs.org tests
@@ -35,7 +35,7 @@ publishTo <<= version { _.endsWith("SNAPSHOT") match {
  	case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
  	case false => Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
   }
- } 
+ }
 
 credentials += Credentials( file("sonatype.credentials") )
 
@@ -67,10 +67,10 @@ pomExtra := (
 	      <name>Richard Dallaway</name>
 	      <url>http://richard.dallaway.com</url>
 	 	</developer>
-	 </developers> 
+	 </developers>
  )
-  
 
-// Thank you: 
+
+// Thank you:
 // https://github.com/sbt/sbt.github.com/blob/gen-master/src/jekyll/using_sonatype.md
 // https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
