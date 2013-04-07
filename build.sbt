@@ -1,10 +1,14 @@
 name := "google-analytics"
 
+organization := "net.liftmodules"
+
+version := "1.0-SNAPSHOT"
+
 liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
 
-version <<= liftVersion apply { _ + "-1.0-SNAPSHOT" }
+liftEdition <<= liftVersion apply { _.substring(0,3) }
 
-organization := "net.liftmodules"
+name <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
 
 scalaVersion := "2.9.2"
 
@@ -17,8 +21,7 @@ resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
 libraryDependencies <++= liftVersion { v =>
-  "net.liftweb" %% "lift-webkit" % v % "compile->default" ::
-  "net.liftweb" %% "lift-mapper" % v % "compile->default" ::
+  "net.liftweb" %% "lift-webkit" % v % "provided" ::
   Nil
 }
 
