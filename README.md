@@ -13,6 +13,9 @@ That is, if you supply a Google Analytics tracking ID, the head of all pages wil
         // For Lift 2.5.x (Scala 2.9 and 2.10):
          "net.liftmodules" %% "google-analytics_2.5" % "1.0"
 
+        // For Lift 2.6.x (Scala 2.9 and 2.10):
+         "net.liftmodules" %% "google-analytics_2.6" % "1.0"
+
         // For Lift 3.0.x (Scala 2.10):
          "net.liftmodules" %% "google-analytics_3.0" % "1.0-SNAPSHOT"
 
