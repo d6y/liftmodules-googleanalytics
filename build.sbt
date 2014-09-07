@@ -4,15 +4,13 @@ organization := "net.liftmodules"
 
 version := "1.1-SNAPSHOT"
 
-liftVersion <<= liftVersion ?? "2.6-SNAPSHOT"
+liftVersion <<= liftVersion ?? "2.6-M4"
 
 liftEdition <<= liftVersion apply { _.substring(0,3) }
 
 moduleName <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
 
-scalaVersion := "2.10.3"
-
-crossScalaVersions := Seq("2.10.0", "2.9.2", "2.9.1-1", "2.9.1")
+scalaVersion := "2.11.2"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
@@ -26,13 +24,12 @@ libraryDependencies <++= liftVersion { v =>
 }
 
 libraryDependencies ++= Seq(
-  "org.scala-tools.testing" % "specs_2.9.0" % "1.6.8" % "test", // For specs.org tests
+  "org.specs2"  %% "specs2"    % "2.3.12" % "test",
   "junit" % "junit" % "4.8" % "test->default", // For JUnit 4 testing
   "javax.servlet" % "servlet-api" % "2.5" % "provided->default",
   "com.h2database" % "h2" % "1.2.138", // In-process database, useful for development systems
   "ch.qos.logback" % "logback-classic" % "0.9.26" % "compile->default" // Logging
 )
-
 
 publishTo <<= version { _.endsWith("SNAPSHOT") match {
  	case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
@@ -43,7 +40,6 @@ publishTo <<= version { _.endsWith("SNAPSHOT") match {
 credentials += Credentials( file("sonatype.credentials") )
 
 credentials += Credentials( file("/private/liftmodules/sonatype.credentials") )
-
 
 publishMavenStyle := true
 
