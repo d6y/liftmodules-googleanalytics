@@ -1,5 +1,5 @@
 /*
-	Copyright 2011-2014 Spiral Arm Ltd
+  Copyright 2011-2015 Spiral Arm Ltd
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -20,15 +20,15 @@ import scala.xml.Unparsed
 object Async {
 
   def headJs(id: String) = <script type="text/javascript">
-  	var _gaq = _gaq || [];
-  	_gaq.push(['_setAccount', '{Unparsed(id)}']);
-  	_gaq.push(['_trackPageview']);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '{Unparsed(id)}']);
+    _gaq.push(['_trackPageview']);
     (function() {{
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0];
       s.parentNode.insertBefore(ga, s);
     }})();
-  	</script>
+    </script>
 
 }

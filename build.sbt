@@ -4,17 +4,19 @@ organization := "net.liftmodules"
 
 version := "1.1-SNAPSHOT"
 
-liftVersion <<= liftVersion ?? "2.6-M4"
+liftVersion <<= liftVersion ?? "3.0-SNAPSHOT"
 
 liftEdition <<= liftVersion apply { _.substring(0,3) }
 
 moduleName <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
 
-scalaVersion := "2.11.2"
+scalaVersion := "2.11.7"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
+
+resolvers +=  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
@@ -32,8 +34,8 @@ libraryDependencies ++= Seq(
 )
 
 publishTo <<= version { _.endsWith("SNAPSHOT") match {
- 	case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
- 	case false => Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
+   case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
+   case false => Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
   }
  }
 
@@ -48,25 +50,25 @@ publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
 
 pomExtra := (
-	<url>https://github.com:d6y/liftmodules-googleanalytics</url>
-	<licenses>
-		<license>
-	      <name>Apache 2.0 License</name>
-	      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-	      <distribution>repo</distribution>
-	    </license>
-	 </licenses>
-	 <scm>
-	    <url>git@github.com:d6y/liftmodules-googleanalytics.git</url>
-	    <connection>scm:git:git@github.com:d6y/liftmodules-googleanalytics.git</connection>
-	 </scm>
-	 <developers>
-	    <developer>
-	      <id>d6y</id>
-	      <name>Richard Dallaway</name>
-	      <url>http://richard.dallaway.com</url>
-	 	</developer>
-	 </developers>
+  <url>https://github.com:d6y/liftmodules-googleanalytics</url>
+  <licenses>
+    <license>
+        <name>Apache 2.0 License</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        <distribution>repo</distribution>
+      </license>
+   </licenses>
+   <scm>
+      <url>git@github.com:d6y/liftmodules-googleanalytics.git</url>
+      <connection>scm:git:git@github.com:d6y/liftmodules-googleanalytics.git</connection>
+   </scm>
+   <developers>
+      <developer>
+        <id>d6y</id>
+        <name>Richard Dallaway</name>
+        <url>http://richard.dallaway.com</url>
+     </developer>
+   </developers>
  )
 
 
