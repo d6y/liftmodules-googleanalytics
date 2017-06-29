@@ -5,7 +5,7 @@ name := "google-analytics"
 
 organization := "net.liftmodules"
 
-version := "1.1-SNAPSHOT"
+version := "1.1"
 
 liftVersion := "3.0.1"
 
