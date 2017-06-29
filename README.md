@@ -12,8 +12,11 @@ That is, if you supply a Google Analytics tracking ID, the head of all pages wil
 
 1. Include the dependency:
 
-        // For Lift 3.0.x (Scala 2.11):
-         "net.liftmodules" %% "google-analytics_3.0" % "1.1-SNAPSHOT"
+        // For Lift 3.1.x (Scala 2.12):
+        "net.liftmodules" %% "google-analytics_3.0" % "1.1.0-SNAPSHOT"
+
+        // For Lift 3.0.x (Scala 2.12, 2.11):
+        "net.liftmodules" %% "google-analytics_3.0" % "1.1"
 
         // For Lift 3.0.x (Scala 2.10):
         "net.liftmodules" %% "google-analytics_3.0" % "1.0-SNAPSHOT"
