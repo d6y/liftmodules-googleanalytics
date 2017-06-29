@@ -1,16 +1,21 @@
+val liftVersion = SettingKey[String]("liftVersion", "Full version number of the Lift Web Framework")
+val liftEdition = SettingKey[String]("liftEdition", "Lift Edition (short version number to append to artifact name)")
+
 name := "google-analytics"
 
 organization := "net.liftmodules"
 
 version := "1.1-SNAPSHOT"
 
-liftVersion <<= liftVersion ?? "3.0-SNAPSHOT"
+liftVersion := "3.0.1"
 
-liftEdition <<= liftVersion apply { _.substring(0,3) }
+liftEdition := liftVersion.value.replaceAllLiterally("-SNAPSHOT", "").split('.').take(2).mkString(".")
 
-moduleName <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
+moduleName := name.value + "_" + liftEdition.value
 
-scalaVersion := "2.11.7"
+crossScalaVersions := Seq("2.12.2", "2.11.11")
+
+scalaVersion := crossScalaVersions.value.head
 
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
@@ -20,18 +25,8 @@ resolvers +=  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repo
 
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
-libraryDependencies <++= liftVersion { v =>
-  "net.liftweb" %% "lift-webkit" % v % "provided" ::
-  Nil
-}
-
-libraryDependencies ++= Seq(
-  "org.specs2"  %% "specs2"    % "2.3.12" % "test",
-  "junit" % "junit" % "4.8" % "test->default", // For JUnit 4 testing
-  "javax.servlet" % "servlet-api" % "2.5" % "provided->default",
-  "com.h2database" % "h2" % "1.2.138", // In-process database, useful for development systems
-  "ch.qos.logback" % "logback-classic" % "0.9.26" % "compile->default" // Logging
-)
+libraryDependencies +=
+  "net.liftweb" %% "lift-webkit" % liftVersion.value % "provided"
 
 publishTo <<= version { _.endsWith("SNAPSHOT") match {
    case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
