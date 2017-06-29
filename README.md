@@ -1,5 +1,7 @@
 # Google Analytics Lift Module
 
+[![Build Status](https://travis-ci.org/d6y/liftmodules-googleanalytics.svg?branch=master)](https://travis-ci.org/d6y/liftmodules-googleanalytics)
+
 Inserts the [Google Analytics async tracking code](http://code.google.com/apis/analytics/docs/tracking/asyncTracking.html) into a [Lift](http://www.liftweb.net) application.
 
 That is, if you supply a Google Analytics tracking ID, the head of all pages will have the Google tracking Javascript code automatically added.
