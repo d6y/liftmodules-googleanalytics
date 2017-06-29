@@ -23,20 +23,14 @@ resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
 resolvers +=  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
-resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
 libraryDependencies +=
   "net.liftweb" %% "lift-webkit" % liftVersion.value % "provided"
 
-publishTo <<= version { _.endsWith("SNAPSHOT") match {
-   case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
-   case false => Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
-  }
- }
-
-credentials += Credentials( file("sonatype.credentials") )
-
-credentials += Credentials( file("/private/liftmodules/sonatype.credentials") )
+credentials ++= (for {
+  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
+  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
+} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
 
 publishMavenStyle := true
 
