@@ -35,11 +35,11 @@ That is, if you supply a Google Analytics tracking ID, the head of all pages wil
 
           bootstrap.liftmodules.GoogleAnalytics.init
 
-3. Finally, set your tracking code as the `google.analytics.id` in your Props file.  For example, add the following to `src/main/resources/production.default.props`
+3. Finally, set your tracking code as the `google.tag.manager.id` in your Props file.  For example, add the following to `src/main/resources/production.default.props`
 
-         google.analytics.id=UA-XXXXXXXX-X
+         google.tag.manager.id=GTM-XXXXXX
 
-    ...obviously replacing `XXXXXXX-X` with the code Google issued you with.  Be sure to start your Lift app with `-Drun.mode=production` flag (or set the value of google.analytics.id in your dev props file).
+    ...obviously replacing `XXXXXX` with the code Google issued you with.  Be sure to start your Lift app with `-Drun.mode=production` flag (or set the value of google.tag.manager.id in your dev props file).
 
 
 ## Conditional behaviour
