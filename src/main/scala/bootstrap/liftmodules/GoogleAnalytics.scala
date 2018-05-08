@@ -19,16 +19,24 @@ import net.liftweb.http._
 import net.liftweb.util.Props
 import net.liftweb.http.js.JsCmd
 import net.liftweb.http.js.JsCmds._
-import net.liftweb.common.Loggable
-
+import net.liftweb.common.Logger
 import net.liftmodules.googleanalytics.Async
 
-object GoogleAnalytics extends Loggable {
+object GoogleAnalytics {
 
-  def init: Unit = init( ()⇒true )
+  def init: Unit = init(()⇒true, Props.get("google.tag.manager.id", ""))
 
-  def init(includeTest: () ⇒ Boolean): Unit = Props.get("google.analytics.id") map Async.headJs foreach { js =>
-    def addTracking(s: LiftSession, r: Req) : Unit =  if (includeTest()) S.putInHead(js)
+  /**
+    * @param includeTest
+    * @param gtmId - Google Tag Manager Id
+    */
+  def init(includeTest: () ⇒ Boolean, gtmId: String): Unit = {
+    val js = Async.headJs(gtmId)
+    val jsScript = Async.bodyScript(gtmId)
+    def addTracking(s: LiftSession, r: Req): Unit = if (includeTest()) {
+      S.putInHead(js)
+      S.putAtEndOfBody(jsScript)
+    }
     LiftSession.onBeginServicing = addTracking _ :: LiftSession.onBeginServicing
   }
 
@@ -38,7 +46,7 @@ object GoogleAnalytics extends Loggable {
     def addNotice(s: LiftSession, r: Req) : Unit =  try {
         if (cond()) S.appendJs(noticeJs)
       } catch {
-        case e : Throwable => logger.error("Unhandled exception from alertUser", e)
+        case e : Throwable => Logger.apply("Unhandled exception from alertUser").error(e)
     }
 
     LiftSession.onBeginServicing = addNotice _ :: LiftSession.onBeginServicing
