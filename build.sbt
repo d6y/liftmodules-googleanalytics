@@ -5,9 +5,9 @@ name := "google-analytics"
 
 organization := "net.liftmodules"
 
-version := "1.2.0"
+version := "1.2.1-SNAPSHOT"
 
-liftVersion := "3.2.1-SNAPSHOT"
+liftVersion := "3.2.0"
 
 liftEdition := liftVersion.value.replaceAllLiterally("-SNAPSHOT", "").split('.').take(2).mkString(".")
 
