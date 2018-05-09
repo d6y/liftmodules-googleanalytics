@@ -5,7 +5,7 @@ name := "google-analytics"
 
 organization := "net.liftmodules"
 
-version := "1.1.1-SNAPSHOT"
+version := "1.2.0-SNAPSHOT"
 
 liftVersion := "3.2.0"
 
@@ -27,6 +27,11 @@ resolvers +=  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repo
 libraryDependencies +=
   "net.liftweb" %% "lift-webkit" % liftVersion.value % "provided"
 
+publishTo := (version.value.endsWith("SNAPSHOT") match {
+  case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
+  case false => Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
+  }
+)
 credentials ++= (for {
   username <- Option(System.getenv().get("SONATYPE_USERNAME"))
   password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
