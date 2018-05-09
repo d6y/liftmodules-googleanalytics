@@ -12,6 +12,12 @@ That is, if you supply a Google Analytics tracking ID, the head of all pages wil
 
 1. Include the dependency:
 
+        // For Lift 3.2.x (Scala 2.12):
+        "net.liftmodules" %% "google-analytics_3.2" % "1.2.0-SNAPSHOT"
+
+    Note that from 1.2.0 onwards this module switched to using Google Tag Manager (via [#8](https://github.com/d6y/liftmodules-googleanalytics/pull/8)).
+    The versions below use the older `ga.js` approach.
+
         // For Lift 3.1.x (Scala 2.12):
         "net.liftmodules" %% "google-analytics_3.1" % "1.1.0-SNAPSHOT"
 
