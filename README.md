@@ -7,13 +7,12 @@ Inserts the [Google Analytics async tracking code](http://code.google.com/apis/a
 That is, if you supply a Google Analytics tracking ID, the head of all pages will have the Google tracking Javascript code automatically added.
 
 
-
 ## Using this module
 
 1. Include the dependency:
 
         // For Lift 3.2.x (Scala 2.12):
-        "net.liftmodules" %% "google-analytics_3.2" % "1.2.0-SNAPSHOT"
+        "net.liftmodules" %% "google-analytics_3.2" % "1.2.0"
 
     Note that from 1.2.0 onwards this module switched to using Google Tag Manager (via [#8](https://github.com/d6y/liftmodules-googleanalytics/pull/8)).
     The versions below use the older `ga.js` approach.
